@@ -11,13 +11,21 @@
             playerSelection = playerSelection.toUpperCase();
             computerSelection = computerSelection.toUpperCase();
 
-            return playerSelection == 'PAPER' && computerSelection == 'ROCK' ? 'You Win! Paper beats Rock': 
-            playerSelection == 'PAPER' && computerSelection == 'SCISSORS' ? 'You Lose! Scissors beats Paper':
-            playerSelection == 'ROCK' && computerSelection == 'SCISSORS' ? 'You Win! Rock beats Scissors': 
+            return winGame(playerSelection, computerSelection) || loseGame(playerSelection, computerSelection) ||"It's a tie!";   
+        }
+
+        function winGame(playerSelection, computerSelection) {
+            return playerSelection == 'PAPER' && computerSelection == 'ROCK' ? 'You Win! Paper beats Rock':
+            playerSelection == 'ROCK' && computerSelection == 'SCISSORS' ? 'You Win! Rock beats Scissors':
+            playerSelection == 'SCISSORS' && computerSelection == 'PAPER' ? 'You Win! Scissors beats Paper':
+            false;
+        }
+
+        function loseGame(playerSelection, computerSelection) {
+            return playerSelection == 'PAPER' && computerSelection == 'SCISSORS' ? 'You Lose! Scissors beats Paper':
             playerSelection == 'ROCK' && computerSelection == 'PAPER' ? 'You Lose! Paper beats Rock':
-            playerSelection == 'SCISSORS' && computerSelection == 'PAPER' ? 'You Win! Scissors beats Paper': 
             playerSelection == 'SCISSORS' && computerSelection == 'ROCK' ? 'You Lose! Rock beats Scissors':
-            "It's a tie!";   
+            false;
         }
 
         const playerSelection = "rock";
