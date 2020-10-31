@@ -15,17 +15,27 @@
         }
 
         function winGame(playerSelection, computerSelection) {
-            return playerSelection == 'PAPER' && computerSelection == 'ROCK' ? 'You Win! Paper beats Rock':
+            let results = playerSelection == 'PAPER' && computerSelection == 'ROCK' ? 'You Win! Paper beats Rock':
             playerSelection == 'ROCK' && computerSelection == 'SCISSORS' ? 'You Win! Rock beats Scissors':
             playerSelection == 'SCISSORS' && computerSelection == 'PAPER' ? 'You Win! Scissors beats Paper':
             false;
+            if (results) {
+                playerScore++;
+                computerScore--;
+            }
+            return results;
         }
 
         function loseGame(playerSelection, computerSelection) {
-            return playerSelection == 'PAPER' && computerSelection == 'SCISSORS' ? 'You Lose! Scissors beats Paper':
+            let results = playerSelection == 'PAPER' && computerSelection == 'SCISSORS' ? 'You Lose! Scissors beats Paper':
             playerSelection == 'ROCK' && computerSelection == 'PAPER' ? 'You Lose! Paper beats Rock':
             playerSelection == 'SCISSORS' && computerSelection == 'ROCK' ? 'You Lose! Rock beats Scissors':
             false;
+            if (results) {
+                playerScore--;
+                computerScore++;
+            }
+            return results;
         }
 
         const playerSelection = "rock";
@@ -33,8 +43,13 @@
         console.log(playRound(playerSelection, computerSelection));
 
         function game() {
+            let playerScore = 0, computerScore = 0;
+            let playerSelection, computerSelection;
             for (let i = 0; i < 5; i++) {
-                playRound();
+                playerSelection = prompt("Choose Rock, Paper or Scissors");
+                computerSelection = computerPlay();
+                playRound(playerSelection, computerSelection);
+                console.log(`Player: ${playerScore} Computer: ${computerScore}`);
             }
         }
     </script>
