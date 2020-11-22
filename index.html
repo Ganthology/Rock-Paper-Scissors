@@ -3,6 +3,10 @@
     <head></head>
     <body>
         <div>
+            <h1 id='Message'>MESSAGE</h1>
+            <h1 id='Score'>Current Score:</h1>
+        </div>
+        <div>
             <button onclick="playRound('PAPER', computerPlay())">Paper</button>
             <button onclick="playRound('SCISSORS', computerPlay())">Scissors</button>
             <button onclick="playRound('ROCK', computerPlay())">Rock</button>
@@ -12,6 +16,10 @@
         let choices = ['Paper', 'Scissors', 'Rock'];
         let playerScore = 0, computerScore = 0;
 
+        const message = document.querySelector('#Message');
+        const score = document.querySelector('#Score');
+        score.textContent = `Current Score: ${playerScore};Computer Score: ${computerScore}`;
+
         let computerPlay = () => {
             return choices[Math.floor(Math.random() * choices.length)];
         };
@@ -20,7 +28,7 @@
             playerSelection = playerSelection.toUpperCase();
             computerSelection = computerSelection.toUpperCase();
 
-            return winGame(playerSelection, computerSelection) || loseGame(playerSelection, computerSelection) ||"It's a tie!";   
+            message.textContent = winGame(playerSelection, computerSelection) || loseGame(playerSelection, computerSelection) ||"It's a tie!";   
         }
 
         function winGame(playerSelection, computerSelection) {
@@ -47,7 +55,6 @@
             return results;
         }
 
-        game();
     </script>
 
 </html>
