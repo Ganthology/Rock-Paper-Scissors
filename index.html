@@ -18,7 +18,6 @@
 
         const message = document.querySelector('#Message');
         const score = document.querySelector('#Score');
-        score.textContent = `Current Score: ${playerScore};Computer Score: ${computerScore}`;
 
         let computerPlay = () => {
             return choices[Math.floor(Math.random() * choices.length)];
@@ -27,32 +26,34 @@
         function playRound(playerSelection, computerSelection) {
             playerSelection = playerSelection.toUpperCase();
             computerSelection = computerSelection.toUpperCase();
-
-            message.textContent = winGame(playerSelection, computerSelection) || loseGame(playerSelection, computerSelection) ||"It's a tie!";   
+            if (winGame(playerSelection, computerSelection)) {
+                ++playerScore;
+            }
+            else if (loseGame(playerSelection, computerSelection)) {
+                ++computerScore;
+            }
+            score.textContent = `Current Score: ${playerScore};Computer Score: ${computerScore}`;
+            message.textContent = (winMessage()) ? winMessage():
+            winGame(playerSelection, computerSelection) || loseGame(playerSelection, computerSelection) ||"It's a tie!"; 
+            
         }
 
         function winGame(playerSelection, computerSelection) {
-            let results = playerSelection == 'PAPER' && computerSelection == 'ROCK' ? 'You Win! Paper beats Rock':
+            return results = playerSelection == 'PAPER' && computerSelection == 'ROCK' ? 'You Win! Paper beats Rock':
             playerSelection == 'ROCK' && computerSelection == 'SCISSORS' ? 'You Win! Rock beats Scissors':
             playerSelection == 'SCISSORS' && computerSelection == 'PAPER' ? 'You Win! Scissors beats Paper':
             false;
-            if (results) {
-                playerScore++;
-                computerScore--;
-            }
-            return results;
         }
 
         function loseGame(playerSelection, computerSelection) {
-            let results = playerSelection == 'PAPER' && computerSelection == 'SCISSORS' ? 'You Lose! Scissors beats Paper':
+            return results = playerSelection == 'PAPER' && computerSelection == 'SCISSORS' ? 'You Lose! Scissors beats Paper':
             playerSelection == 'ROCK' && computerSelection == 'PAPER' ? 'You Lose! Paper beats Rock':
             playerSelection == 'SCISSORS' && computerSelection == 'ROCK' ? 'You Lose! Rock beats Scissors':
             false;
-            if (results) {
-                playerScore--;
-                computerScore++;
-            }
-            return results;
+        }
+
+        function winMessage() {
+            return (playerScore == 5) ? 'You Win': (computerScore == 5) ? 'Computer Wins':false;
         }
 
     </script>
